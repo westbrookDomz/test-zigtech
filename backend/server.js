@@ -1,6 +1,14 @@
 const express = require('express');
 const { sequelize } = require('./config/config.js');
 const dotenv = require('dotenv');
+const db = require('./models');
+db.sequelize.sync({ alter: true }) 
+  .then(() => {
+    console.log('Database synced');
+  })
+  .catch((err) => {
+    console.error('Error syncing database:', err);
+  });
 
 
 dotenv.config();
